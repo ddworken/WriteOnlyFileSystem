@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+
+# Modified from: https://github.com/terencehonles/fusepy/blob/master/examples/memory.py
+
 from __future__ import print_function, absolute_import, division
 
 import logging
@@ -128,16 +131,22 @@ class Memory(LoggingMixIn, Operations):
         self.files[path]['st_mtime'] = mtime
 
     def write(self, path, data, offset, fh):
+	# make the encryptor object
 	e = encryptor.encryptor(config.publicKey)
+	# encrypt the data
 	encryptedData = e.encrypt(data)
+	# Append the encrypted data to the file
 	self.data[path] = self.data[path][:offset] + encryptedData
+	# Set the size of the file
 	self.files[path]['st_size'] = len(self.data[path])
+	# Back the up the file remotely
 	client.createFile(config.ip,
 			  config.port,
 			  path[1:],
 			  self.data[path],
 			  config.password,
 			  chunkSize=config.chunkSize)
+	# Return the length of the file
 	return len(data)
 
 
