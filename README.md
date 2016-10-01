@@ -5,7 +5,7 @@ WriteOnlyFileSystem or WOFS is a FUSE based python program to create a cryptogra
 ## Usage
 
 1. Run ```python wofs.py /mnt``` to mount a cryptographically backed write only filesystem in ```/mnt/```. 
-2. Run ```python server.py``` on a remote server to create a secure SSL authenticated server to host encrypted backups of the logs. 
+2. Run ```python server.py``` on a remote server to create a secure SSL authenticated server to host encrypted backups of the logs. It will store all encrypted logs in ```out/```. 
 3. When you need to view the contents of ```log.txt``` run ```python decrypt.py log.txt```to view the plaintext log file. 
 
 ## Installation
@@ -15,3 +15,4 @@ WriteOnlyFileSystem or WOFS is a FUSE based python program to create a cryptogra
 3. ```pip install -r requirements.txt```
 4. Ensure you have a GPG public key in your GPG keychain
 5. Ensure you don't have the matching GPG private key in your GPG keychain
+
