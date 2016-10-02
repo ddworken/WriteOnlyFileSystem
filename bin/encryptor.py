@@ -7,9 +7,9 @@ class encryptor():
 	self.pubKey = pubKey
 	self.gpg = gnupg.GPG()
 	self.gpg.import_keys(open(pubKey).read())
-	self.fingerprint = self.gpg.list_keys()[0]['fingerprint']
+	self.fingerprint = self.gpg.list_keys()[1]['fingerprint']
 
     def encrypt(self, data):
 	""" String -> String
 	    Encrypts the given data with the public key"""
-	return str(self.gpg.encrypt(data, self.fingerprint))
+	return str(self.gpg.encrypt(data, self.fingerprint)).replace("-----BEGIN PGP MESSAGE-----", "").replace("-----END PGP MESSAGE-----","").lstrip().rstrip()+"\n\n"

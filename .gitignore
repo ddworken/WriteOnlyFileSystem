@@ -1,3 +1,5 @@
+bin/gpg.asc
+gpg.asc
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

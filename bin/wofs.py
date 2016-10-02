@@ -155,5 +155,5 @@ if __name__ == '__main__':
         print('usage: %s <mountpoint>' % argv[0])
         exit(1)
 
-    logging.basicConfig(level=logging.DEBUG)
+#    logging.basicConfig(level=logging.DEBUG)
     fuse = FUSE(Memory(), argv[1], foreground=True)

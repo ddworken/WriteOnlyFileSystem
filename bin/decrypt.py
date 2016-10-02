@@ -9,11 +9,10 @@ def decrypt(data):
 	Takes a string that is a series of armored GPG encrypted strings.
 	Returns the decrypted output of all of thsoe concatenated together."""
     gpg = gnupg.GPG()
-    gpgChunks = [str for str in data.split("-----BEGIN PGP MESSAGE-----")[1:]]  # first one is empty, so don't include it
+    gpgChunks = [str for str in data.split("\n\n")[:-1]]
     decrypted = ""
     for chunk in gpgChunks:
-	chunk = "-----BEGIN PGP MESSAGE-----" + chunk
-	chunk = stripNewLinesFromStartAndEnd(stripLinesAfterEnd(chunk))
+	chunk = "-----BEGIN PGP MESSAGE-----\n\n" + chunk + "\n-----END PGP MESSAGE-----\n"
 	with open('/tmp/temp.gpg', 'w+') as f:
 	    f.write(chunk)
 	with open(os.devnull, 'w') as dn:
